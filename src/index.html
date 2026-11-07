@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>NOVA GAME LAUNCHER</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="renderer.js" defer></script>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="logo">✦</div><div><strong>NOVA</strong><span>GAME LAUNCHER</span></div></div>
+    <div class="side-label">NAWIGACJA</div>
+    <nav aria-label="Nawigacja">
+      <button class="nav active" data-view="all"><span>▦</span> Biblioteka <span id="navCount" class="count">0</span></button>
+      <button class="nav" data-view="favorites"><span>★</span> Ulubione</button>
+      <button class="nav" data-view="recent"><span>◷</span> Ostatnio grane</button>
+    </nav>
+    <div class="side-bottom"><div class="status-dot"></div><div>Wersja 1.0.0<small>Twoje gry w jednym miejscu</small></div></div>
+  </aside>
+  <main>
+    <header class="topbar"><div class="breadcrumbs">PANEL / <b>BIBLIOTEKA GIER</b></div><button id="exportBtn" class="ghost">↓ Eksport biblioteki</button></header>
+    <div class="content">
+      <section class="hero"><div class="hero-glow"></div><div class="hero-copy"><div class="eyebrow">✦ TWOJE CENTRUM GAMINGOWE</div><h1>Wszystkie gry.<br><em>Jedno miejsce.</em></h1><p>Uruchamiaj gry Windows i przeglądarkowe bez szukania skrótów i linków.</p><button id="addHero" class="primary">＋ Dodaj swoją grę</button></div><div class="hero-art"><div class="orb"><div class="inner-logo">N</div></div><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div></div></section>
+      <section class="stats" aria-label="Statystyki"><div class="stat"><div class="stat-icon purple">▦</div><div><strong id="statGames">0</strong><span>Gier w bibliotece</span></div></div><div class="stat"><div class="stat-icon blue">▶</div><div><strong id="statPlays">0</strong><span>Łączne uruchomienia</span></div></div><div class="stat"><div class="stat-icon pink">★</div><div><strong id="statFav">0</strong><span>Ulubione gry</span></div></div></section>
+      <section class="library"><div class="section-top"><div><div class="eyebrow">ODKRYWAJ I GRAJ</div><h2 id="viewTitle">Twoja biblioteka <span id="shownCount">(0)</span></h2></div><button class="primary smaller" id="addBtn">＋ Dodaj grę</button></div>
+      <div class="toolbar"><label class="search">⌕ <input id="search" placeholder="Szukaj w bibliotece..." aria-label="Szukaj gier"></label><select id="typeFilter" aria-label="Typ gier"><option value="all">Wszystkie typy</option><option value="local">Gry Windows EXE</option><option value="web">Gry przeglądarkowe</option></select><select id="sort" aria-label="Sortowanie"><option value="new">Najnowsze</option><option value="name">Nazwa A–Z</option><option value="played">Najczęściej grane</option></select></div>
+      <div id="gameGrid" class="game-grid" aria-live="polite"></div>
+      <div id="empty" class="empty" hidden><div class="empty-icon">🎮</div><h3 id="emptyTitle">Biblioteka czeka na Twoje gry</h3><p id="emptyDesc">Dodaj swój pierwszy plik EXE albo adres gry internetowej.</p><button id="emptyAdd" class="primary">＋ Dodaj pierwszą grę</button></div>
+      </section>
+      <footer>© NOVA GAME LAUNCHER • Lokalna biblioteka • Windows 10/11</footer>
+    </div>
+  </main>
+</div>
+<dialog id="addModal"><form id="addForm" novalidate><div class="modal-head"><div><div class="eyebrow">NOWA POZYCJA</div><h2>Dodaj grę</h2></div><button id="closeModal" type="button" class="close" aria-label="Zamknij">×</button></div><label class="field">Nazwa gry<input name="name" id="gameName" maxlength="90" required placeholder="Np. MINING TYCOON-ULTRA"></label><label class="field">Typ gry<select id="gameType"><option value="local">Gra Windows (.exe)</option><option value="web">Gra online (http / https)</option></select></label><label class="field"><span id="targetLabel">Plik EXE</span><div class="file-row"><input id="gameTarget" required placeholder="Wybierz plik .exe" autocomplete="off"><button type="button" id="browseBtn" class="ghost">Przeglądaj</button></div></label><p class="hint">Gry pozostają w swoich folderach. Launcher zapisuje tylko nazwę i ścieżkę lub URL.</p><div id="formError" role="alert" class="form-error" hidden></div><div class="modal-actions"><button id="cancelBtn" type="button" class="ghost">Anuluj</button><button class="primary" type="submit">Zapisz grę</button></div></form></dialog>
+<div id="toast" role="status" class="toast" hidden></div>
+</body></html>
