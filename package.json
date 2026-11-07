@@ -1,15 +1,15 @@
 {
   "name": "nova-game-launcher",
   "productName": "NOVA GAME LAUNCHER",
-  "version": "1.0.0",
-  "description": "Desktop game library and launcher for Windows",
+  "version": "2.0.0",
+  "description": "NOVA GAME LAUNCHER 2.0: library plus and automatic local EXE playtime tracking",
   "main": "src/main.js",
   "author": "NOVA",
   "license": "MIT",
   "scripts": {
     "start": "electron .",
     "test": "node --test tests/*.test.js",
-    "check": "node --check src/main.js && node --check src/preload.js && node --check src/renderer.js && node --check src/library.js",
+    "check": "node scripts/verify-files.js && node --check src/main.js && node --check src/preload.js && node --check src/renderer.js && node --check src/library.js",
     "dist": "electron-builder --win nsis portable --publish never"
   },
   "devDependencies": {
@@ -19,10 +19,36 @@
   "build": {
     "appId": "com.nova.gamelauncher",
     "productName": "NOVA GAME LAUNCHER",
-    "artifactName": "NOVA-GAME-LAUNCHER-1.0-${arch}.${ext}",
-    "directories": {"output": "dist"},
-    "files": ["src/**/*", "assets/**/*", "package.json"],
-    "win": {"target": [{"target": "nsis", "arch": ["x64"]}, {"target": "portable", "arch": ["x64"]}]},
-    "nsis": {"oneClick": false, "allowToChangeInstallationDirectory": true, "createDesktopShortcut": true, "createStartMenuShortcut": true}
+    "artifactName": "NOVA-GAME-LAUNCHER-2.0-${arch}.${ext}",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
   }
 }

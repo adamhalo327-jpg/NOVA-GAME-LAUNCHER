@@ -1,34 +1,43 @@
-# NOVA GAME LAUNCHER 1.0 — Windows
+# NOVA GAME LAUNCHER 2.0 — GAME LIBRARY PLUS
 
-Pierwsza wersja aplikacji do uruchamiania **lokalnych gier EXE** i **gier WWW**.
+Windows 10/11 Electron application. Upgrade of stable 1.0.1.
 
-## Co działa w 1.0
-- Biblioteka gier: dodawanie EXE (przez okno wyboru) lub URL HTTP/HTTPS.
-- Uruchamianie EXE w Windows i otwieranie gier online w domyślnej przeglądarce.
-- Ulubione, wyszukiwanie, filtry, sortowanie i ostatnio uruchamiane.
-- Liczniki gier oraz uruchomień i eksport kopii JSON.
-- Automatyczny zapis w `%APPDATA%/nova-game-launcher/games.json` (lokalnie, bez konta).
-- Gra jest usuwana wyłącznie z biblioteki — nie z dysku.
+## Implemented in 2.0
+- Add / launch / remove Windows EXE or HTTP(S) browser games.
+- Local library, favorites, recent, search and sort.
+- **New:** custom game covers (PNG/JPG/WEBP up to 1.5MB), category editing and filtering.
+- **New:** edit game names without losing launch counts.
+- **New:** local nickname and four accent themes (purple, blue, red, gold).
+- **New:** six automatically unlocked local achievements.
+- Library JSON export and preserved `games.json` app storage; installed upgrade maintains the previous app ID and data folder.
 
-**Uwaga:** Launcher nie pobiera gier automatycznie, nie instaluje ich, nie wykonuje aktualizacji gier, nie ma kont ani synchronizacji w chmurze. Adresy WWW uruchamiają się w domyślnej przeglądarce.
+## Known scope
+- Local profiles only; no external account service.
+- Launch counts are recorded; precise hours played and automatic game updates are **not** implemented in this version.
+- Adding EXEs is a user-initiated action; only run executables you trust.
+- Installer files are unsigned, so Windows SmartScreen may warn.
 
-## Uruchomienie ze źródeł na Windows
-1. Zainstaluj Node.js 22 (LTS) i Git.
-2. Pobierz repozytorium / rozpakuj ZIP.
-3. Otwórz PowerShell w folderze, w którym znajduje się `package.json`.
-4. Uruchom: `npm install`, potem `npm start`.
+## Build on GitHub Actions
+1. Unpack this ZIP and upload **its contents** to repository root, including hidden `.github/workflows`.
+2. Commit and push to `main`.
+3. In Actions run `Build NOVA GAME LAUNCHER EXE` (or let the push trigger it).
+4. Download Artifacts: `NOVA-GAME-LAUNCHER-2.0-Windows`.
 
-## Zbudowanie EXE bez Visual Studio / lokalnego kompilowania
-1. Wgraj **zawartość** folderu do nowego repozytorium GitHub (zachowując `.github/workflows/build-windows.yml`).
-2. Wejdź w **Actions** → **Build NOVA GAME LAUNCHER EXE** → **Run workflow**.
-3. Po zielonym zakończeniu otwórz uruchomienie i pobierz archiwum **NOVA-GAME-LAUNCHER-1.0-Windows** z sekcji Artifacts.
-4. Rozpakuj: zobaczysz instalator NSIS oraz wersję portable `.exe` (nazwy mogą różnić się sufiksem architektury).
+## Local development
+```sh
+npm install
+npm run check
+npm test
+npm start
+npm run dist
+```
 
-Alternatywnie lokalnie: `npm install` → `npm run dist`; wyniki w folderze `dist`.
+Do not place a nested project folder above `src/`, `package.json`, and `.github/`.
 
-## Ważne informacje
-- Budowane pliki EXE są **niepodpisane** certyfikatem wydawcy. Windows SmartScreen może wyświetlić ostrzeżenie.
-- Uruchamiaj wyłącznie zaufane pliki EXE. Launcher uruchamia wskazany program z uprawnieniami użytkownika.
-- Eksport JSON zawiera lokalne ścieżki i URL-e gier; nie udostępniaj go publicznie, jeśli są prywatne.
-- Dla gier Cloudflare Pages używaj pełnego adresu URL (np. `https://example.pages.dev`).
-- Build wymaga dostępu do Internetu, aby pobrać Electron i electron-builder.
+
+## Licznik czasu gry (dodany do 2.0)
+- Windows EXE: pomiar działa od uruchomienia programu przez NOVA do zakończenia procesu uruchomionego EXE.
+- Wynik jest zapisywany w `games.json` co około 5 sekund, także po zakończeniu procesu i przy normalnym zamknięciu launchera.
+- Biblioteka pokazuje czas każdej gry oraz sumę wszystkich sesji; sortowanie według czasu gry.
+- Istniejące dane 1.0.1 i 2.0 zostają zachowane; licznik startuje od zera, bo wcześniejszy czas nie był rejestrowany.
+- **Ograniczenia:** licznik nie śledzi gier WWW, uruchomień poza NOVA, ani gier, których launcher EXE uruchamia inny proces i natychmiast się zamyka. Zamknięcie NOVA kończy mierzenie, nawet jeśli gra nadal działa. Awaria lub wymuszone zamknięcie launchera może spowodować utratę najwyżej ostatnich sekund.

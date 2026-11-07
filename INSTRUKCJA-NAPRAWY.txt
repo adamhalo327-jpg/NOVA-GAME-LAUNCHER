@@ -1,0 +1,13 @@
+NOVA GAME LAUNCHER 1.0.1 — FIX PUSTEGO EKRANU
+
+1. Rozpakuj ZIP na Windows.
+2. W GitHub Desktop wybierz repozytorium NOVA-GAME-LAUNCHER i Repository > Show in Explorer.
+3. Skopiuj CAŁĄ zawartość folderu NOVA-GAME-LAUNCHER-1.0.1-FIX (a nie sam folder) do głównego katalogu repozytorium. Potwierdź zastąpienie starych plików.
+4. Musisz mieć w katalogu głównym package.json, folder src, scripts, tests oraz .github.
+5. W GitHub Desktop zrób Commit, a potem Push origin.
+6. GitHub > Actions > Build NOVA GAME LAUNCHER EXE > Run workflow. Pobierz nowy artefakt EXE i zainstaluj go lub uruchom wersję Portable.
+7. NIE używaj starego instalatora i nie wklejaj tymczasowych pustych plików.
+
+Opcjonalnie diagnoza: w PowerShell uruchom portable EXE po ustawieniu: $env:NOVA_DEBUG='1' - wtedy pokażą się narzędzia developerskie Electron.
+
+UWAGA: Jest to kod projektu; EXE jest generowany dopiero w GitHub Actions.
